@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/loginFragment"
+        android:title="@string/menu_login" />
+    <item
+        android:id="@+id/projectOverviewFragment"
+        android:title="@string/menu_project_overview" />
+    <item
+        android:id="@+id/addProjectFragment"
+        android:title="@string/menu_add_project" />
+    <item
+        android:id="@+id/seeProjectStats"
+        android:title="@string/menu_see_stats"/>
+</menu>

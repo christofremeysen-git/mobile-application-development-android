@@ -1,6 +1,13 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs'
+    id 'org.jetbrains.dokka'
+}
+
+configurations {
+    ktlint
 }
 
 android {
@@ -8,12 +15,14 @@ android {
 
     defaultConfig {
         applicationId "com.example.schedioapp"
-        minSdk 19
+        minSdk 23
         targetSdk 31
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+        manifestPlaceholders = [auth0Domain: "dev-l0pdju9l.eu.auth0.com", auth0Scheme:"demo"]
     }
 
     buildTypes {
@@ -29,15 +38,108 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    dataBinding{
+        enabled = true
+    }
+    testOptions.unitTests {
+        includeAndroidResources = true
+    }
 }
 
 dependencies {
+    // Core libraries
+    implementation "androidx.core:core-ktx:1.7.0"
+    implementation "androidx.appcompat:appcompat:1.4.0"
+    implementation "com.google.android.material:material:$version_material"
+    implementation "com.google.android.material:material:1.6.0-alpha01"
+    implementation "androidx.constraintlayout:constraintlayout:2.1.2"
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.0'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    // Lifecycle
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
+    implementation "androidx.lifecycle:lifecycle-extensions:$version_lifecycle"
+
+    // Legacy support
+    implementation "androidx.legacy:legacy-support-v4:1.0.0"
+
+    // Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$version_navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:$version_navigation"
+
+    // Authentication
+    implementation "com.auth0.android:auth0:$version_oauth"
+    implementation "androidx.security:security-crypto-ktx:1.1.0-alpha03"
+
+    // Testing
+    implementation "androidx.test.ext:junit-ktx:$version_junit"
+    androidTestImplementation "androidx.test.ext:junit:$version_junit"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.4.0"
+    testImplementation "junit:junit:"
+    testImplementation "org.hamcrest:hamcrest:2.2"
+    testImplementation "org.robolectric:robolectric:4.5.1"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+
+    // Room
+    kapt "androidx.room:room-compiler:$version_room"
+    implementation "androidx.room:room-common:$version_room"
+    implementation "androidx.room:room-ktx:$version_room"
+    testImplementation "androidx.room:room-testing:$version_room"
+
+    // Activity delegates
+    implementation "androidx.activity:activity-ktx:1.4.0"
+    implementation "androidx.fragment:fragment-ktx:1.4.0"
+
+    // Moshi
+    implementation "com.squareup.moshi:moshi:$version_moshi"
+    implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$version_retrofit"
+    implementation "com.squareup.retrofit2:converter-scalars:$version_retrofit"
+    // Logging for Retrofit with OkHttp
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
+    // Retrofit with Moshi Converter
+    implementation "com.squareup.retrofit2:converter-moshi:$version_retrofit"
+    //Retrofit with coroutines
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2"
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:$version_glide"
+
+    // Ktlint
+    ktlint("com.pinterest:ktlint:$version_ktlint") {
+        attributes {
+            attribute(Bundling.BUNDLING_ATTRIBUTE, getObjects().named(Bundling, Bundling.EXTERNAL))
+        }
+    }
+
+    // Logging
+    implementation "com.jakewharton.timber:timber:$version_timber"
+
+    // Documentation
+    dokkaHtmlPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:$version_dokka")
+}
+
+task ktlint(type: JavaExec, group: "verification") {
+    description = "Check Kotlin code style."
+    classpath = configurations.ktlint
+    main = "com.pinterest.ktlint.Main"
+    args "src/**/*.kt"
+    // to generate report in checkstyle format prepend following args:
+    // "--reporter=plain", "--reporter=checkstyle,output=${buildDir}/ktlint.xml"
+    // to add a baseline to check against prepend following args:
+    // "--baseline=ktlint-baseline.xml"
+    // see https://github.com/pinterest/ktlint#usage for more
+}
+check.dependsOn ktlint
+
+task ktlintFormat(type: JavaExec, group: "formatting") {
+    description = "Fix Kotlin code style deviations."
+    classpath = configurations.ktlint
+    main = "com.pinterest.ktlint.Main"
+    args "-F", "src/**/*.kt"
+}
+
+tasks.dokkaHtml.configure {
+    outputDirectory.set(file("../documentation.html"))
+    suppressInheritedMembers.set(true)
 }
