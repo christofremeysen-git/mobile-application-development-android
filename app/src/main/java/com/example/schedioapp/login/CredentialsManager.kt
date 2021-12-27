@@ -8,6 +8,8 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.auth0.android.result.Credentials
 
+// https://auth0.com/docs/libraries/auth0-android
+
 object CredentialsManager {
 
     private const val ACCESS_TOKEN = "access_token"
