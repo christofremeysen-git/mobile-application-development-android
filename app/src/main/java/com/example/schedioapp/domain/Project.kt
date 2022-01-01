@@ -10,7 +10,7 @@ data class Project(
     val type: String,
     val budget: Number,
     val status: String,
-    val taken: Array<Taak>
+    // val taken: List<Taak>
 ) {
 
 }

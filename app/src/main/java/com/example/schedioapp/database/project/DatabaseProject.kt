@@ -2,14 +2,19 @@ package com.example.schedioapp.database.project
 
 import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
+import com.example.schedioapp.domain.Project
+//import com.example.schedioapp.domain.Taak
 import com.squareup.moshi.Json
+import java.util.*
+import kotlin.collections.ArrayList
 
 // https://medium.com/androiddevelopers/7-pro-tips-for-room-fbadea4bfbd1
 
 @Entity(tableName = "project_table")
 data class DatabaseProject(
-        @PrimaryKey(autoGenerate = true)
+        @PrimaryKey()
         @ColumnInfo(name = "id")
+        @Json(name = "id")
         val id: Int = 0,
 
         @ColumnInfo(name = "project_naam")
@@ -30,13 +35,13 @@ data class DatabaseProject(
 
         @ColumnInfo(name = "project_budget")
         @Json(name = "budget")
-        val budget: Int,
+        val budget: Double,
 
         @ColumnInfo(name = "project_status")
         @Json(name = "status")
-        val status: String,
+        val status: String
 )
-
+/*
 @Entity(tableName = "taak_table",
         foreignKeys = arrayOf(
         ForeignKey(
@@ -46,16 +51,16 @@ data class DatabaseProject(
                 onDelete = CASCADE,
                 onUpdate = CASCADE,
                 deferred = false)
+        ),
+        indices = arrayOf(
+                Index(value = arrayOf("project_id"))
         )
 )
 data class DatabaseTaak(
 
-        @PrimaryKey(autoGenerate = true)
+        @PrimaryKey()
         @ColumnInfo(name = "taak_id")
         val taakId: Int,
-
-        @ColumnInfo(name = "project_id")
-        val projectId: Int,
 
         @ColumnInfo(name = "taak_naam")
         @Json(name = "naam")
@@ -79,7 +84,10 @@ data class DatabaseTaak(
 
         @ColumnInfo(name = "taak_status")
         @Json(name = "status")
-        val status: String
+        val status: String,
+
+        @ColumnInfo(name = "project_id")
+        val projectId: Int
 )
 
 data class DatabaseProjectWithTaken(
@@ -89,5 +97,32 @@ data class DatabaseProjectWithTaken(
                 parentColumn = "id",
                 entityColumn = "project_id"
         )
-        val taken: List<DatabaseTaak> = ArrayList()
+        val taken: List<DatabaseTaak>
 )
+*/
+// Convert Project to ApiProject
+fun List<DatabaseProject/*WithTaken*/>.asDomainModel(): List<Project> {
+        val dateConverter: DateConverter = DateConverter()
+        return map {
+                Project(
+                        id = it/*.project*/.id,
+                        naam = it/*.project*/.naam,
+                        startDatum = dateConverter.toDate(it/*.project*/.startDatum),
+                        eindDatum = dateConverter.toDate(it/*.project*/.startDatum),
+                        type = it/*.project*/.type,
+                        budget = it/*.project*/.budget,
+                        status = it/*.project*/.status,
+                        /*taken = it.taken.map { databaseTaak ->
+                                Taak(
+                                        databaseTaak.taakId,
+                                        databaseTaak.naam,
+                                        dateConverter.toDate(databaseTaak.taakStartDatum),
+                                        dateConverter.toDate(databaseTaak.taakEindDatum),
+                                        databaseTaak.categorie,
+                                        databaseTaak.prioriteit,
+                                        databaseTaak.status
+                                )
+                        }*/
+                )
+        }
+}

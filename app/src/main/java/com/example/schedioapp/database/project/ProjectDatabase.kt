@@ -12,11 +12,16 @@ class DateConverter() {
     // https://developer.android.com/training/data-storage/room/relationships#one-to-many
     @TypeConverter
     fun fromDate(date: Date): String {
-        var result: String = dateTimeConversion(date)
-        return date?.let { date?.toString() }
+        var result: String = dateTimeStringConversion(date)
+        return date?.let { result }
     }
 
-    fun dateTimeConversion(date: Date): String {
+    fun toDate(date: String): Date {
+        var result: Date = dateTimeDateConversion(date)
+        return date?.let { result }
+    }
+
+    fun dateTimeStringConversion(date: Date): String {
         val cal: Calendar = GregorianCalendar()
         cal.time = date
 
@@ -33,9 +38,20 @@ class DateConverter() {
                 timeOffset
     }
 
+    fun dateTimeDateConversion(date: String): Date {
+        val year: Int = date.split("-")[0].toInt()
+        val month: Int = date.split("-")[1].toInt()
+        val day: Int = date.split("-")[2].split("T")[0].toInt()
+
+        val cal: Calendar = GregorianCalendar(year, month, day)
+
+        val date: Date = cal.time
+        return date
+    }
+
 }
 
-@Database(entities = [DatabaseProject::class, DatabaseTaak::class], version = 1, exportSchema = false)
+@Database(entities = [DatabaseProject::class/*, DatabaseTaak::class*/], version = 1, exportSchema = false)
 @TypeConverters(DateConverter::class)
 abstract class ProjectDatabase: RoomDatabase() {
 

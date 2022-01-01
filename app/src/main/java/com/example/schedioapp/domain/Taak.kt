@@ -1,8 +1,9 @@
 package com.example.schedioapp.domain
 
 import java.util.*
-
+/*
 data class Taak(
+    var taakId: Int,
     var naam: String,
     var taakStartDatum: Date,
     var taakEindDatum: Date,
@@ -12,3 +13,4 @@ data class Taak(
 ) {
 
 }
+*/

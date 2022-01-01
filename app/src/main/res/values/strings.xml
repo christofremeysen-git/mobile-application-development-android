@@ -2,11 +2,9 @@
     <string name="app_name">SchedioApp</string>
     <string name="login_text">Je bent aangemeld!</string>
     <string name="logout_text">Je bent afgemeld!</string>
-    <string name="login_error">Er is iets misgelopen…</string>
     <string name="welcome_text">Welkom</string>
     <string name="login_button">Aanmelden</string>
     <string name="logout_button">Afmelden</string>
-    <string name="header_title">Schédio app</string>
     <string name="menu_home">Start</string>
     <string name="menu_about_us">Over ons</string>
     <string name="menu_login">Aanmelden</string>
