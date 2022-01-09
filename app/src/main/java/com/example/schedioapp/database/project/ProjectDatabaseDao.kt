@@ -28,6 +28,9 @@ interface ProjectDatabaseDao {
     @Query("SELECT * FROM project_table ORDER BY id DESC")
     fun getAllProjectsLive(): LiveData<List<DatabaseProject>>
 
+    @Query("SELECT * FROM project_table WHERE project_status = :key ORDER BY id")
+    fun getAllFilteredProjects(key: String): LiveData<List<DatabaseProject>>
+
     // Insert a specific project, including taken
     //@Transaction
     /*@Insert(onConflict = OnConflictStrategy.REPLACE)

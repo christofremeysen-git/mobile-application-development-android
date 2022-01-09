@@ -1,12 +1,16 @@
 package com.example.schedioapp.repository
 
+import android.location.Location
 import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.example.schedioapp.database.project.ProjectDatabase
 import com.example.schedioapp.database.project.asDomainModel
 import com.example.schedioapp.domain.Project
 import com.example.schedioapp.network.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
 import retrofit2.await
 import timber.log.Timber
@@ -15,15 +19,39 @@ import java.lang.Exception
 class ProjectRepository(private val database: ProjectDatabase) {
 
     val projects = MediatorLiveData<List<Project>>()
+    val filter = MutableLiveData<String>(null)
+    val projectsFilter = Transformations.switchMap(filter) {
+        filter -> when(filter) {
+            "Open" -> Transformations.map(database.projectDatabaseDao.getAllFilteredProjects("Open")) {
+                it.asDomainModel()
+            }
+            "Bezig" -> Transformations.map(database.projectDatabaseDao.getAllFilteredProjects("Bezig")) {
+                it.asDomainModel()
+            }
+            "Hangende" -> Transformations.map(database.projectDatabaseDao.getAllFilteredProjects("Hangende")) {
+                it.asDomainModel()
+            }
+            "Voltooid" -> Transformations.map(database.projectDatabaseDao.getAllFilteredProjects("Voltooid")) {
+                it.asDomainModel()
+            }
+            else -> Transformations.map(database.projectDatabaseDao.getAllProjectsLive()) {
+                it.asDomainModel()
+            }
+        }
+    }
 
-    private var changeableLiveData = Transformations.map(database.projectDatabaseDao.getAllProjectsLive()) {
+    private var changeableLiveProjectData = Transformations.map(database.projectDatabaseDao.getAllProjectsLive()) {
         it.asDomainModel()
     }
 
     init {
-        projects.addSource(changeableLiveData) {
+        projects.addSource(changeableLiveProjectData) {
             projects.setValue(it)
         }
+    }
+
+    fun addProjectsFilter(filter: String?) {
+        this.filter.value = filter
     }
 
     // @Throws(Exception::class)

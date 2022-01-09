@@ -1,5 +1,7 @@
 package com.example.schedioapp.domain
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
 data class Project(
@@ -11,6 +13,4 @@ data class Project(
     val budget: Number,
     val status: String,
     // val taken: List<Taak>
-) {
-
-}
+)
