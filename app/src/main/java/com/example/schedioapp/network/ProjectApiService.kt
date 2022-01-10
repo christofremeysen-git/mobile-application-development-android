@@ -26,6 +26,8 @@ import okhttp3.ResponseBody.Companion.toResponseBody
 import org.hamcrest.StringDescription
 import org.json.JSONObject
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.http.Body
+import retrofit2.http.POST
 import timber.log.Timber
 import java.io.IOException
 import java.util.logging.Level.INFO
@@ -72,6 +74,9 @@ interface ProjectApiService {
     /* @GET("projects/9")
     @Throws(Exception::class)
     fun getProjectAsync(): Deferred<ApiProject>*/
+
+    @POST("project")
+    fun putProject(@Body project: ApiProject): Deferred<ApiProject>
 }
 
 /*val wrappedStringJson = """{
@@ -404,4 +409,5 @@ class httpInterceptor: Interceptor {
         responseBody = responseString.toResponseBody(contentType)
         return originalResponse.newBuilder().body(responseBody).build()
     }
+
 }

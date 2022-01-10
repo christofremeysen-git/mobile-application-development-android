@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="AddProjectViewModel"
+            type="com.example.schedioapp.screens.addProject.AddProjectViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.schedioapp.screens.addProject.AddProjectFragment">
+
+
+        <EditText
+            android:id="@+id/project_naam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Project naam"
+            android:inputType="textPersonName"
+            android:text=""
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/project_startdatum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="date"
+            android:minHeight="48dp"
+            android:hint="Project startdatum"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/project_naam" />
+
+        <ImageView
+            android:id="@+id/project_startdatum_calendar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/project_startdatum"
+            app:layout_constraintTop_toTopOf="@id/project_startdatum"
+            app:srcCompat="@drawable/ic_baseline_calendar_month_24" />
+
+        <EditText
+            android:id="@+id/project_einddatum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="date"
+            android:minHeight="48dp"
+            android:hint="Project einddatum"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/project_startdatum" />
+
+        <ImageView
+            android:id="@+id/project_einddatum_calendar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/project_einddatum"
+            app:layout_constraintTop_toTopOf="@id/project_einddatum"
+            app:srcCompat="@drawable/ic_baseline_calendar_month_24" />
+
+        <EditText
+            android:id="@+id/project_budget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:minHeight="48dp"
+            android:hint="Project budget"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/project_einddatum" />
+
+        <EditText
+            android:id="@+id/project_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Project status"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/project_type" />
+
+        <EditText
+            android:id="@+id/project_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Project type"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:text=""
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/project_budget" />
+
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:onClickListener="@{() -> AddProjectViewModel.submitProjectCLick()}"
+            app:layout_constraintTop_toBottomOf="@id/project_status"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

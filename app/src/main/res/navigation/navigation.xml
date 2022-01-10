@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/projectOverviewFragment">
+    app:startDestination="@id/addProjectFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -25,4 +25,12 @@
         android:name="com.example.schedioapp.screens.projectsOverview.ProjectOverviewFragment"
         android:label="ProjectOverviewFragment"
         tools:layout="@layout/fragment_project_overview" />
+    <fragment
+        android:id="@+id/addProjectFragment"
+        android:name="com.example.schedioapp.screens.addProject.AddProjectFragment"
+        android:label="AddProjectFragment">
+        <action
+            android:id="@+id/action_addProjectFragment_to_projectOverviewFragment"
+            app:destination="@id/projectOverviewFragment" />
+    </fragment>
 </navigation>

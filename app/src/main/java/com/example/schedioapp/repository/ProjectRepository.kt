@@ -4,10 +4,12 @@ import android.location.Location
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
+import com.example.schedioapp.database.project.DateConverter
 import com.example.schedioapp.database.project.ProjectDatabase
 import com.example.schedioapp.database.project.asDomainModel
 import com.example.schedioapp.domain.Project
 import com.example.schedioapp.network.*
+import com.example.schedioapp.network.ProjectApi.mockPutJoke
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
@@ -68,6 +70,25 @@ class ProjectRepository(private val database: ProjectDatabase) {
 
             Timber.i("Projects refreshed via API")
         }
+    }
+
+    suspend fun addProject(newProject: Project): Project {
+        val dateConverter: DateConverter = DateConverter()
+        val newApiProject = ApiProject(
+            id = newProject.id,
+            naam = newProject.naam,
+            startDatum = dateConverter.fromDate(newProject.startDatum),
+            eindDatum = dateConverter.fromDate(newProject.eindDatum),
+            budget = newProject.budget.toDouble(),
+            status = newProject.status,
+            type = newProject.type
+        )
+
+        ProjectApi.retrofitService.putProject(newApiProject)
+        val checkApiProject = ProjectApi.retrofitService.mockPutJoke(newApiProject)
+        database.projectDatabaseDao.insert(checkApiProject.asDatabaseProject())
+
+        return newProject
     }
 
 }
