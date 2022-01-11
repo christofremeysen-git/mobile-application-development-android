@@ -29,17 +29,17 @@ data class DatabaseProject(
         @Json(name = "eindDatum")
         val eindDatum: String,
 
-        @ColumnInfo(name = "project_type")
-        @Json(name = "type")
-        val type: String,
-
         @ColumnInfo(name = "project_budget")
         @Json(name = "budget")
         val budget: Double,
 
         @ColumnInfo(name = "project_status")
         @Json(name = "status")
-        val status: String
+        val status: String,
+
+        @ColumnInfo(name = "project_type")
+        @Json(name = "type")
+        val type: String
 )
 /*
 @Entity(tableName = "taak_table",
@@ -109,9 +109,9 @@ fun List<DatabaseProject/*WithTaken*/>.asDomainModel(): List<Project> {
                         naam = it/*.project*/.naam,
                         startDatum = dateConverter.toDate(it/*.project*/.startDatum),
                         eindDatum = dateConverter.toDate(it/*.project*/.startDatum),
-                        type = it/*.project*/.type,
                         budget = it/*.project*/.budget,
                         status = it/*.project*/.status,
+                        type = it/*.project*/.type
                         /*taken = it.taken.map { databaseTaak ->
                                 Taak(
                                         databaseTaak.taakId,

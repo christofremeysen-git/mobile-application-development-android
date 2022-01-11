@@ -75,8 +75,12 @@ interface ProjectApiService {
     @Throws(Exception::class)
     fun getProjectAsync(): Deferred<ApiProject>*/
 
-    @POST("project")
+    @POST("projects")
     fun putProject(@Body project: ApiProject): Deferred<ApiProject>
+    // https://www.youtube.com/watch?v=m3yj7JaTTPI
+    // https://material.io/components/radio-buttons/android#using-date-pickers
+    // https://www.youtube.com/watch?v=qcDlcITNqnE
+    // https://medium.com/swlh/simplest-post-request-on-android-kotlin-using-retrofit-e0a9db81f11a
 }
 
 /*val wrappedStringJson = """{
@@ -321,7 +325,7 @@ class ProjectSerializer: KSerializer<ApiProject> {
     override fun serialize(encoder: Encoder, value: ApiProject) {
         encoder.encodeStructure(descriptor) {
             encodeIntElement(descriptor,0,value.id)
-            encodeStringElement(descriptor, 1, value.type)
+            encodeStringElement(descriptor, 1, value.naam)
             encodeStringElement(descriptor, 2, value.startDatum)
             encodeStringElement(descriptor, 3, value.eindDatum)
             encodeDoubleElement(descriptor, 4, value.budget)
