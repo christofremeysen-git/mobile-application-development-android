@@ -9,7 +9,7 @@ import com.example.schedioapp.database.project.ProjectDatabase
 import com.example.schedioapp.database.project.asDomainModel
 import com.example.schedioapp.domain.Project
 import com.example.schedioapp.network.*
-import com.example.schedioapp.network.ProjectApi.mockPutJoke
+import com.example.schedioapp.network.ProjectApi.mockPutProject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
@@ -84,11 +84,28 @@ class ProjectRepository(private val database: ProjectDatabase) {
             type = newProject.type
         )
 
-        ProjectApi.retrofitService.putProject(newApiProject)
-        val checkApiProject = ProjectApi.retrofitService.mockPutJoke(newApiProject)
+        // ProjectApi.retrofitService.putProject(newApiProject)
+        val checkApiProject = ProjectApi.retrofitService.mockPutProject(newApiProject)
         database.projectDatabaseDao.insert(checkApiProject.asDatabaseProject())
 
         return newProject
+    }
+
+    suspend fun deleteProject(project: Project) {
+        val dateConverter: DateConverter = DateConverter()
+        val deletedApiProject = ApiProject(
+            id = project.id,
+            naam = project.naam,
+            startDatum = dateConverter.fromDate(project.startDatum),
+            eindDatum = dateConverter.fromDate(project.eindDatum),
+            budget = project.budget.toDouble(),
+            status = project.status,
+            type = project.type
+        )
+
+        val checkApiProject = ProjectApi.retrofitService.mockPutProject(deletedApiProject)
+        // ProjectApi.retrofitService.deleteProject(project.id)
+        database.projectDatabaseDao.delete(deletedApiProject.asDatabaseProject())
     }
 
 }

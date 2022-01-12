@@ -68,8 +68,6 @@ class AddProjectFragment: Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_project, container, false)
 
-
-
         val datePickerStartdatum =
             MaterialDatePicker.Builder.datePicker()
                 .setTitleText("Select date")
@@ -128,7 +126,5 @@ class AddProjectFragment: Fragment() {
 
         return binding.root
     }
-
-
 
 }

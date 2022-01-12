@@ -2,6 +2,7 @@ package com.example.schedioapp.screens.projectsOverview
 
 import android.app.Application
 import androidx.lifecycle.*
+import com.example.schedioapp.database.project.DatabaseProject
 import com.example.schedioapp.database.project.ProjectDatabase
 import com.example.schedioapp.database.project.ProjectDatabaseDao
 import com.example.schedioapp.domain.Project
@@ -10,7 +11,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class ProjectOverviewViewModel(database: ProjectDatabaseDao, application: Application): AndroidViewModel(application){
+class ProjectOverviewViewModel(val database: ProjectDatabaseDao, application: Application): AndroidViewModel(application){
 
     private var currentFilter: String? = null
 
@@ -26,6 +27,20 @@ class ProjectOverviewViewModel(database: ProjectDatabaseDao, application: Applic
             currentFilter = null
         }
         repository.addProjectsFilter(currentFilter)
+    }
+
+    fun deleteProject(project: Project) {
+        viewModelScope.launch {
+            deleteProjectWithRepository(project)
+        }
+    }
+
+    suspend fun deleteProjectFromDatabase(project: DatabaseProject) {
+        database.delete(project)
+    }
+
+    suspend fun deleteProjectWithRepository(project: Project) {
+        repository.deleteProject(project)
     }
 
 }

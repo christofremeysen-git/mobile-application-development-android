@@ -5,7 +5,7 @@ import kotlinx.android.parcel.Parcelize
 import java.util.*
 
 data class Project(
-    var id: Int = 0,
+    var id: Int,
     
     val naam: String,
     val startDatum: Date,

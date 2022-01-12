@@ -1,15 +1,19 @@
 package com.example.schedioapp.screens.projectsOverview
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schedioapp.databinding.ProjectListItemBinding
 import com.example.schedioapp.domain.Project
 import com.example.schedioapp.screens.projectsOverview.ProjectListAdapter.ProjectListViewHolder
+import retrofit2.http.Tag
 
-class ProjectListAdapter(val clickListener: ProjectsListener): ListAdapter<Project, ProjectListViewHolder>(DiffCallback) {
+class ProjectListAdapter(val clickListener: ProjectsListener, val clickDeleteListener: ProjectsDeleteListener): ListAdapter<Project, ProjectListViewHolder>(DiffCallback) {
 
     companion object DiffCallback : DiffUtil.ItemCallback<Project>() {
         override fun areItemsTheSame(oldItem: Project, newItem: Project): Boolean {
@@ -22,10 +26,11 @@ class ProjectListAdapter(val clickListener: ProjectsListener): ListAdapter<Proje
     }
 
     class ProjectListViewHolder(private var binding: ProjectListItemBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(clickListener: ProjectsListener, item: Project) {
+        fun bind(clickListener: ProjectsListener, clickDeleteListener: ProjectsDeleteListener, item: Project) {
             binding.projectNaam.text = item.naam
             binding.project = item
             binding.clickListener = clickListener
+            binding.clickDeleteListener = clickDeleteListener
             binding.executePendingBindings()
         }
 
@@ -45,11 +50,15 @@ class ProjectListAdapter(val clickListener: ProjectsListener): ListAdapter<Proje
 
     override fun onBindViewHolder(holder: ProjectListViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(clickListener, item)
+        holder.bind(clickListener, clickDeleteListener, item)
     }
 
 }
 
-class ProjectsListener(val clickListener: (id: Int) -> Unit) {
-    fun onClick(project: Project) = clickListener(project.id)
+class ProjectsListener(val clickListener: (naam: String) -> Unit) {
+    fun onClick(project: Project) = clickListener(project.naam)
+}
+
+class ProjectsDeleteListener(val clickDeleteListener: (project: Project) -> Unit) {
+    fun onClick(project: Project) = clickDeleteListener(project)
 }

@@ -3,6 +3,7 @@ package com.example.schedioapp.database.project
 import android.provider.ContactsContract
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.schedioapp.domain.Project
 
 // https://developer.android.com/reference/kotlin/androidx/room/OnConflictStrategy
 
@@ -43,5 +44,8 @@ interface ProjectDatabaseDao {
     // Delete a specific project, including taken (remember onDelete = CASCADE)
     @Query("DELETE FROM project_table WHERE id = :key")
     suspend fun clear(key: Int)
+
+    @Delete
+    suspend fun delete(project: DatabaseProject)
 
 }

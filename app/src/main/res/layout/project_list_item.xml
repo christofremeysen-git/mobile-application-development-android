@@ -10,6 +10,9 @@
         <variable
             name="clickListener"
             type="com.example.schedioapp.screens.projectsOverview.ProjectsListener" />
+        <variable
+            name="clickDeleteListener"
+            type="com.example.schedioapp.screens.projectsOverview.ProjectsDeleteListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,6 +28,17 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             />
+
+        <ImageView
+            android:id="@+id/delete_project"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> clickDeleteListener.onClick(project)}"
+            app:layout_constraintStart_toEndOf="@id/projectNaam"
+            app:layout_constraintTop_toTopOf="@id/projectNaam"
+            app:srcCompat="@drawable/ic_baseline_delete_24"
+            android:contentDescription="@string/delete_project" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

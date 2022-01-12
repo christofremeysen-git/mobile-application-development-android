@@ -11,7 +11,6 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Retrofit
-import retrofit2.http.GET
 import java.lang.Exception
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializer
@@ -26,8 +25,7 @@ import okhttp3.ResponseBody.Companion.toResponseBody
 import org.hamcrest.StringDescription
 import org.json.JSONObject
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.POST
+import retrofit2.http.*
 import timber.log.Timber
 import java.io.IOException
 import java.util.logging.Level.INFO
@@ -81,6 +79,10 @@ interface ProjectApiService {
     // https://material.io/components/radio-buttons/android#using-date-pickers
     // https://www.youtube.com/watch?v=qcDlcITNqnE
     // https://medium.com/swlh/simplest-post-request-on-android-kotlin-using-retrofit-e0a9db81f11a
+
+    @DELETE("projects/{id}")
+    fun deleteProject(@Path("id") id: Int): Deferred<ApiProject>
+
 }
 
 /*val wrappedStringJson = """{
@@ -281,7 +283,11 @@ object ProjectApi {
         retrofit.create(ProjectApiService::class.java)
     }
 
-    fun ProjectApiService.mockPutJoke(project: ApiProject): ApiProject {
+    fun ProjectApiService.mockPutProject(project: ApiProject): ApiProject {
+        return project
+    }
+
+    fun ProjectApiService.mockDeleteProject(project: ApiProject): ApiProject {
         return project
     }
 }

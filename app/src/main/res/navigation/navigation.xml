@@ -24,7 +24,11 @@
         android:id="@+id/projectOverviewFragment"
         android:name="com.example.schedioapp.screens.projectsOverview.ProjectOverviewFragment"
         android:label="ProjectOverviewFragment"
-        tools:layout="@layout/fragment_project_overview" />
+        tools:layout="@layout/fragment_project_overview" >
+        <action
+            android:id="@+id/action_projectOverviewFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addProjectFragment"
         android:name="com.example.schedioapp.screens.addProject.AddProjectFragment"

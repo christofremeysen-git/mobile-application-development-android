@@ -5,11 +5,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.example.schedioapp.R
 import com.example.schedioapp.database.project.ProjectDatabase
 import com.example.schedioapp.databinding.FragmentProjectOverviewBinding
@@ -36,7 +39,12 @@ class ProjectOverviewFragment: Fragment() {
         val dataSource = ProjectDatabase.getInstance(application).projectDatabaseDao
 
         adapter = ProjectListAdapter(ProjectsListener {
-            id -> Toast.makeText(context, "${id}", Toast.LENGTH_SHORT).show()
+            // naam -> Toast.makeText(context, "${naam}", Toast.LENGTH_SHORT).show()
+            naam -> view!!.findNavController().navigate(ProjectOverviewFragmentDirections.actionProjectOverviewFragmentToAboutFragment())
+
+        }, ProjectsDeleteListener {
+            // project -> Toast.makeText(context, "${project.id}", Toast.LENGTH_SHORT).show()
+            project -> viewModel.deleteProject(project)
         })
         binding.projectList.adapter = adapter
 
@@ -45,7 +53,6 @@ class ProjectOverviewFragment: Fragment() {
 
         binding.projectOverviewViewModel = viewModel
         binding.lifecycleOwner = this
-
 
         viewModel.projects.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)

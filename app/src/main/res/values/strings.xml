@@ -33,4 +33,12 @@ Nibh nisl condimentum id venenatis a condimentum vitae. Sem nulla pharetra diam 
 
 Ipsum dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Consequat interdum varius sit amet. Tellus rutrum tellus pellentesque eu. Arcu bibendum at varius vel pharetra vel turpis nunc. Ut faucibus pulvinar elementum integer enim. Turpis nunc eget lorem dolor sed viverra. Venenatis urna cursus eget nunc scelerisque viverra mauris in aliquam. In aliquam sem fringilla ut morbi tincidunt augue interdum. At tempor commodo ullamcorper a. Pretium aenean pharetra magna ac placerat vestibulum lectus. Aliquet lectus proin nibh nisl condimentum id. Senectus et netus et malesuada fames. Odio euismod lacinia at quis risus sed vulputate odio ut. Nec ultrices dui sapien eget mi. Pharetra magna ac placerat vestibulum. Nisl tincidunt eget nullam non nisi est. Turpis egestas sed tempus urna et pharetra. In hendrerit gravida rutrum quisque non tellus. Ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at. Dignissim convallis aenean et tortor at risus viverra adipiscing.
     </string>
+    <string name="project_name">Project naam</string>
+    <string name="project_start_date">Startdatum</string>
+    <string name="project_end_date">Einddatum</string>
+    <string name="project_budget">Budget</string>
+    <string name="project_status">Status</string>
+    <string name="project_type">Type</string>
+    <string name="submit">Toevoegen</string>
+    <string name="delete_project">Verwijder project</string>
 </resources>

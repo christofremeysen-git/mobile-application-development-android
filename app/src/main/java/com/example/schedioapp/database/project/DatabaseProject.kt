@@ -105,7 +105,7 @@ fun List<DatabaseProject/*WithTaken*/>.asDomainModel(): List<Project> {
         val dateConverter: DateConverter = DateConverter()
         return map {
                 Project(
-                        // id = it/*.project*/.id,
+                        id = it/*.project*/.id,
                         naam = it/*.project*/.naam,
                         startDatum = dateConverter.toDate(it/*.project*/.startDatum),
                         eindDatum = dateConverter.toDate(it/*.project*/.startDatum),
