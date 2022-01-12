@@ -19,7 +19,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:text="@{projectApiViewModel.projects.get(0).naam}"
+            android:text="@{projectApiViewModel.projects.toString()}"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

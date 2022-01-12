@@ -9,6 +9,7 @@ import com.example.schedioapp.database.project.ProjectDatabase
 import com.example.schedioapp.database.project.asDomainModel
 import com.example.schedioapp.domain.Project
 import com.example.schedioapp.network.*
+import com.example.schedioapp.network.ProjectApi.mockDeleteProject
 import com.example.schedioapp.network.ProjectApi.mockPutProject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -60,7 +61,6 @@ class ProjectRepository(private val database: ProjectDatabase) {
     suspend fun refreshProjects() {
         withContext(Dispatchers.IO) {
             val projects = ProjectApi.retrofitService.getAllProjectsAsync().await()
-
             // Code to refresh all projects
             //val projects = getAllProjs()
             database.projectDatabaseDao.insertAllProjects(*projects.asDatabaseProjectModel())
@@ -73,39 +73,41 @@ class ProjectRepository(private val database: ProjectDatabase) {
     }
 
     suspend fun addProject(newProject: Project): Project {
-        val dateConverter: DateConverter = DateConverter()
+        val dateConverter = DateConverter()
         val newApiProject = ApiProject(
             id = newProject.id,
             naam = newProject.naam,
             startDatum = dateConverter.fromDate(newProject.startDatum),
             eindDatum = dateConverter.fromDate(newProject.eindDatum),
-            budget = newProject.budget.toDouble(),
+            budget = newProject.budget,
             status = newProject.status,
             type = newProject.type
         )
 
         // ProjectApi.retrofitService.putProject(newApiProject)
-        val checkApiProject = ProjectApi.retrofitService.mockPutProject(newApiProject)
-        database.projectDatabaseDao.insert(checkApiProject.asDatabaseProject())
+        /*val checkApiProject = */ProjectApi.retrofitService.putProject(newApiProject)
+        database.projectDatabaseDao.insert(newApiProject.asDatabaseProject())
+        // ProjectApi.retrofitService.putProject(newApiProject)
 
         return newProject
     }
 
     suspend fun deleteProject(project: Project) {
-        val dateConverter: DateConverter = DateConverter()
+        val dateConverter = DateConverter()
         val deletedApiProject = ApiProject(
             id = project.id,
             naam = project.naam,
             startDatum = dateConverter.fromDate(project.startDatum),
             eindDatum = dateConverter.fromDate(project.eindDatum),
-            budget = project.budget.toDouble(),
+            budget = project.budget,
             status = project.status,
             type = project.type
         )
 
-        val checkApiProject = ProjectApi.retrofitService.mockPutProject(deletedApiProject)
+        /*val checkApiProject = */ProjectApi.retrofitService.deleteProject(deletedApiProject.id)
         // ProjectApi.retrofitService.deleteProject(project.id)
         database.projectDatabaseDao.delete(deletedApiProject.asDatabaseProject())
+        // ProjectApi.retrofitService.deleteProject(deletedApiProject.id)
     }
 
 }

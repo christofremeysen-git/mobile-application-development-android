@@ -10,8 +10,13 @@ import com.example.schedioapp.repository.ProjectRepository
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class ProjectOverviewViewModel(val database: ProjectDatabaseDao, application: Application): AndroidViewModel(application){
+
+    private val _status = MutableLiveData<ProjectApiStatus>()
+    val status: LiveData<ProjectApiStatus>
+        get() = _status
 
     private var currentFilter: String? = null
 
@@ -19,6 +24,15 @@ class ProjectOverviewViewModel(val database: ProjectDatabaseDao, application: Ap
     val repository = ProjectRepository(db)
 
     val projects = repository.projectsFilter
+
+    init {
+        Timber.i("Loading projects")
+        viewModelScope.launch {
+            _status.value = ProjectApiStatus.LOADING
+            repository.refreshProjects()
+            _status.value = ProjectApiStatus.DONE
+        }
+    }
 
     fun filterChip(changedFilter: String, isChecked: Boolean) {
         if(isChecked) {
