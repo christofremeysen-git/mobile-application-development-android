@@ -29,17 +29,14 @@ class LoginFragment: Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_login, container, false)
 
         setHasOptionsMenu(true)
 
-        //OAUTH
         account = Auth0(
             "P19jcnynaTin7PEGUimvTOHloP2bUGeM",
             "dev-l0pdju9l.eu.auth0.com"
         )
-
 
         val button = view.findViewById<Button>(R.id.login_button)
         button?.setOnClickListener {
@@ -73,7 +70,6 @@ class LoginFragment: Fragment() {
     private fun checkIfToken(){
         val token = CredentialsManager.getAccessToken(requireContext())
         if(token != null){
-            //checking if the token works...
             showUserProfile(token)
         }
         else {
@@ -92,22 +88,15 @@ class LoginFragment: Fragment() {
     }
 
     private fun loginWithBrowser() {
-        // Setup the WebAuthProvider, using the custom scheme and scope.
 
         WebAuthProvider.login(account)
             .withScheme("demo")
             .withScope("openid profile email")
-            // Launch the authentication passing the callback where the results will be received
             .start(requireContext(), object : Callback<Credentials, AuthenticationException> {
-                // Called when there is an authentication failure
                 override fun onFailure(error: AuthenticationException) {
                     loggedIn = false
                 }
-
-                // Called when authentication completed successfully
                 override fun onSuccess(result: Credentials) {
-                    // Get the access token from the credentials object.
-                    // This can be used to call APIs
                     val accessToken = result.accessToken
                     Toast.makeText(context, accessToken, Toast.LENGTH_SHORT).show()
 
@@ -137,7 +126,6 @@ class LoginFragment: Fragment() {
     private fun showUserProfile(accessToken: String){
         val client = AuthenticationAPIClient(account)
 
-        // With the access token, call `userInfo` and get the profile from Auth0.
         client.userInfo(accessToken)
             .start(object : Callback<UserProfile, AuthenticationException> {
                 override fun onFailure(error: AuthenticationException) {
@@ -147,10 +135,7 @@ class LoginFragment: Fragment() {
                 }
 
                 override fun onSuccess(result: UserProfile) {
-                    // We have the user's profile!
                     Timber.i("SUCCESS! got the user profile")
-                    // val email = result.email.toString()
-                    // val name = result.name.toString()
                     loggedIn = true
                     setLoggedInText()
                 }

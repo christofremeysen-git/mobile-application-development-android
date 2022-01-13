@@ -57,5 +57,4 @@ class AddProjectViewModel(val database: ProjectDatabaseDao, application: Applica
         repository.addProject(newProject)
     }
 
-
 }

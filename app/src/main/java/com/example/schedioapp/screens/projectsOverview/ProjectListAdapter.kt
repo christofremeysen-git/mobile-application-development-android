@@ -55,8 +55,8 @@ class ProjectListAdapter(val clickListener: ProjectsListener, val clickDeleteLis
 
 }
 
-class ProjectsListener(val clickListener: (naam: String) -> Unit) {
-    fun onClick(project: Project) = clickListener(project.naam)
+class ProjectsListener(val clickListener: (project: Project) -> Unit) {
+    fun onClick(project: Project) = clickListener(project)
 }
 
 class ProjectsDeleteListener(val clickDeleteListener: (project: Project) -> Unit) {

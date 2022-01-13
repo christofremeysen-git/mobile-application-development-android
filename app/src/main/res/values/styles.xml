@@ -6,4 +6,5 @@
     <style name="customThemeOverlayBlack" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
         <item name="android:textColor">@color/black</item>"
     </style>
+
 </resources>

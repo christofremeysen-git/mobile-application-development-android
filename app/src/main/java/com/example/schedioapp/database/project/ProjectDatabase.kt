@@ -6,19 +6,15 @@ import java.util.*
 
 class DateConverter() {
 
-    // https://developer.android.com/training/data-storage/room/referencing-data
-    // https://stackoverflow.com/questions/50313525/room-using-date-field
-    // https://docs.oracle.com/javase/7/docs/api/java/util/Calendar.html
-    // https://developer.android.com/training/data-storage/room/relationships#one-to-many
     @TypeConverter
     fun fromDate(date: Date): String {
         var result: String = dateTimeStringConversion(date)
-        return date?.let { result }
+        return result
     }
 
     fun toDate(date: String): Date {
         var result: Date = dateTimeDateConversion(date)
-        return date?.let { result }
+        return result
     }
 
     fun dateTimeStringConversion(date: Date): String {
@@ -45,13 +41,12 @@ class DateConverter() {
 
         val cal: Calendar = GregorianCalendar(year, month, day)
 
-        val date: Date = cal.time
-        return date
+        return cal.time
     }
 
 }
 
-@Database(entities = [DatabaseProject::class/*, DatabaseTaak::class*/], version = 1, exportSchema = false)
+@Database(entities = [DatabaseProject::class], version = 1, exportSchema = false)
 @TypeConverters(DateConverter::class)
 abstract class ProjectDatabase: RoomDatabase() {
 

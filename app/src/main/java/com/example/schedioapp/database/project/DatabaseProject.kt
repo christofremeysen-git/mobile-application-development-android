@@ -1,14 +1,10 @@
 package com.example.schedioapp.database.project
 
-import androidx.room.*
-import androidx.room.ForeignKey.CASCADE
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.example.schedioapp.domain.Project
-//import com.example.schedioapp.domain.Taak
 import com.squareup.moshi.Json
-import java.util.*
-import kotlin.collections.ArrayList
-
-// https://medium.com/androiddevelopers/7-pro-tips-for-room-fbadea4bfbd1
 
 @Entity(tableName = "project_table")
 data class DatabaseProject(
@@ -100,6 +96,7 @@ data class DatabaseProjectWithTaken(
         val taken: List<DatabaseTaak>
 )
 */
+
 // Convert Project to ApiProject
 fun List<DatabaseProject/*WithTaken*/>.asDomainModel(): List<Project> {
         val dateConverter: DateConverter = DateConverter()

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SchedioApp</string>
+    <string name="app_name">Schedio</string>
     <string name="login_text">Je bent aangemeld!</string>
     <string name="logout_text">Je bent afgemeld!</string>
     <string name="welcome_text">Welkom</string>

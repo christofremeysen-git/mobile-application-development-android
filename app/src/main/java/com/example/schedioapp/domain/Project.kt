@@ -4,7 +4,8 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
-data class Project(
+@Parcelize
+data class Project (
     var id: Int,
     
     val naam: String,
@@ -14,4 +15,4 @@ data class Project(
     val status: String,
     val type: String
     // val taken: List<Taak>
-)
+) : Parcelable

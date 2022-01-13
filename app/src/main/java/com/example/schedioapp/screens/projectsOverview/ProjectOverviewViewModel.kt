@@ -7,12 +7,12 @@ import com.example.schedioapp.database.project.ProjectDatabase
 import com.example.schedioapp.database.project.ProjectDatabaseDao
 import com.example.schedioapp.domain.Project
 import com.example.schedioapp.repository.ProjectRepository
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class ProjectOverviewViewModel(val database: ProjectDatabaseDao, application: Application): AndroidViewModel(application){
+
+    var currentProject = 1
 
     private val _status = MutableLiveData<ProjectApiStatus>()
     val status: LiveData<ProjectApiStatus>

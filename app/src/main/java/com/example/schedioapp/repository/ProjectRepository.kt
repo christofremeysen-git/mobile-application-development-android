@@ -11,10 +11,7 @@ import com.example.schedioapp.domain.Project
 import com.example.schedioapp.network.*
 import com.example.schedioapp.network.ProjectApi.mockDeleteProject
 import com.example.schedioapp.network.ProjectApi.mockPutProject
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import retrofit2.await
 import timber.log.Timber
 import java.lang.Exception
@@ -57,17 +54,10 @@ class ProjectRepository(private val database: ProjectDatabase) {
         this.filter.value = filter
     }
 
-    // @Throws(Exception::class)
     suspend fun refreshProjects() {
         withContext(Dispatchers.IO) {
             val projects = ProjectApi.retrofitService.getAllProjectsAsync().await()
-            // Code to refresh all projects
-            //val projects = getAllProjs()
             database.projectDatabaseDao.insertAllProjects(*projects.asDatabaseProjectModel())
-
-            // Code to refresh a single project
-            //database.projectDatabaseDao.insert(projects.asDatabaseProject())
-
             Timber.i("Projects refreshed via API")
         }
     }
@@ -84,10 +74,8 @@ class ProjectRepository(private val database: ProjectDatabase) {
             type = newProject.type
         )
 
-        // ProjectApi.retrofitService.putProject(newApiProject)
-        /*val checkApiProject = */ProjectApi.retrofitService.putProject(newApiProject)
+        ProjectApi.retrofitService.putProject(newApiProject)
         database.projectDatabaseDao.insert(newApiProject.asDatabaseProject())
-        // ProjectApi.retrofitService.putProject(newApiProject)
 
         return newProject
     }
@@ -104,10 +92,8 @@ class ProjectRepository(private val database: ProjectDatabase) {
             type = project.type
         )
 
-        /*val checkApiProject = */ProjectApi.retrofitService.deleteProject(deletedApiProject.id)
-        // ProjectApi.retrofitService.deleteProject(project.id)
+        ProjectApi.retrofitService.deleteProject(deletedApiProject.id)
         database.projectDatabaseDao.delete(deletedApiProject.asDatabaseProject())
-        // ProjectApi.retrofitService.deleteProject(deletedApiProject.id)
     }
 
 }

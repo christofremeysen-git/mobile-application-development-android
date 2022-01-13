@@ -1,25 +1,19 @@
 package com.example.schedioapp.screens.projectsOverview
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.example.schedioapp.R
 import com.example.schedioapp.database.project.ProjectDatabase
 import com.example.schedioapp.databinding.FragmentProjectOverviewBinding
 import com.google.android.material.chip.Chip
-import timber.log.Timber
-import java.util.*
-import kotlin.streams.toList
+import kotlinx.serialization.builtins.serializer
 
 class ProjectOverviewFragment: Fragment() {
 
@@ -39,11 +33,8 @@ class ProjectOverviewFragment: Fragment() {
         val dataSource = ProjectDatabase.getInstance(application).projectDatabaseDao
 
         adapter = ProjectListAdapter(ProjectsListener {
-            // naam -> Toast.makeText(context, "${naam}", Toast.LENGTH_SHORT).show()
-            naam -> view!!.findNavController().navigate(ProjectOverviewFragmentDirections.actionProjectOverviewFragmentToAboutFragment())
-
+            project -> view!!.findNavController().navigate(ProjectOverviewFragmentDirections.actionProjectOverviewFragmentToProjectFragment(project))
         }, ProjectsDeleteListener {
-            // project -> Toast.makeText(context, "${project.id}", Toast.LENGTH_SHORT).show()
             project -> viewModel.deleteProject(project)
         })
         binding.projectList.adapter = adapter

@@ -1,22 +1,10 @@
 package com.example.schedioapp.network
 
-import android.os.Parcel
-import android.os.Parcelable
 import com.example.schedioapp.database.project.DatabaseProject
-//import com.example.schedioapp.database.project.DatabaseTaak
-import com.example.schedioapp.database.project.DateConverter
-import com.example.schedioapp.domain.Project
-//import com.example.schedioapp.domain.Taak
-import com.squareup.moshi.*
-import kotlinx.android.parcel.Parcelize
-import kotlinx.serialization.SerialName
-import org.json.JSONArray
-import java.lang.UnsupportedOperationException
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class ApiProjectContainer(
-    //@Json(name="body")
     @Serializable(with = ProjectsSerializer::class)
     val apiProjects: ArrayList<ApiProject>
 )
@@ -59,6 +47,7 @@ fun ApiProjectContainer.asDomainModel(): List<Project> {
     }
 }
 */
+
 fun ApiProjectContainer.asDatabaseProjectModel(): Array<DatabaseProject> {
     return apiProjects.map {
         DatabaseProject(

@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_projectOverviewFragment_to_aboutFragment"
             app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_projectOverviewFragment_to_projectFragment"
+            app:destination="@id/projectFragment" />
     </fragment>
     <fragment
         android:id="@+id/addProjectFragment"
@@ -36,5 +39,14 @@
         <action
             android:id="@+id/action_addProjectFragment_to_projectOverviewFragment"
             app:destination="@id/projectOverviewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/projectFragment"
+        android:name="com.example.schedioapp.screens.projectsDetail.ProjectFragment"
+        android:label="ProjectFragment"
+        tools:layout="@layout/fragment_project">
+        <argument
+            android:name="project"
+            app:argType="com.example.schedioapp.domain.Project" />
     </fragment>
 </navigation>

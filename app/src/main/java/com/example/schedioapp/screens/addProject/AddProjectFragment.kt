@@ -96,8 +96,6 @@ class AddProjectFragment: Fragment() {
             binding.projectEinddatum.setText(datePickerEinddatum.headerText)
         }
 
-        // datePicker.show(parentFragmentManager,"test")
-
         val app = requireNotNull(this.activity).application
         val dataSource = ProjectDatabase.getInstance(app).projectDatabaseDao
 
