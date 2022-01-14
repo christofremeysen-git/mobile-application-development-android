@@ -2,6 +2,9 @@ package com.example.schedioapp.domain
 
 import java.util.*
 
+/**
+ * Taak model class, which is not yet in use
+ */
 data class Taak(
     var taakId: Int,
     var naam: String,

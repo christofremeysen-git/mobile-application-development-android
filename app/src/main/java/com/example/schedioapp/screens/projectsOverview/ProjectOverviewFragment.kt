@@ -14,6 +14,10 @@ import com.example.schedioapp.databinding.FragmentProjectOverviewBinding
 import com.google.android.material.chip.Chip
 import kotlinx.serialization.builtins.serializer
 
+/**
+ * A [Fragment] subclass
+ * Responsible for displaying all projects
+ */
 class ProjectOverviewFragment: Fragment() {
 
     lateinit var binding: FragmentProjectOverviewBinding

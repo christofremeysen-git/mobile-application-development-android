@@ -28,12 +28,27 @@ import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
 import java.util.*
 
+/**
+ * Class used to convert Material dates from String to Date/Long
+ */
 class MaterialDateConverter {
+    /**
+     * Transforms a string into a date
+     *
+     * @property date A date string
+     * @return A date object
+     */
     fun toDate(date: String): Date {
         var result: Date = dateTimeDateConversion(date)
         return result
     }
 
+    /**
+     * Transforms a string into a Long date
+     *
+     * @property date A date string
+     * @return A Long date object
+     */
     fun toLong(date: String): Long {
         var result: Long = dateTimeLongConversion(date)
         return result
@@ -78,6 +93,10 @@ class MaterialDateConverter {
 
 }
 
+/**
+ * A [Fragment] subclass
+ * Responsible for the add project view
+ */
 class AddProjectFragment: Fragment() {
 
     lateinit var binding: FragmentAddProjectBinding
@@ -140,6 +159,11 @@ class AddProjectFragment: Fragment() {
         var projectStatus = binding.projectStatus.text
         var projectType = binding.projectType.text
 
+        /**
+         * Validates the project name
+         *
+         * @property projectNaam Editable text
+         */
         fun projectNaamValidator(projectNaam: Editable) {
             var projectNaam = projectNaam.toString()
 
@@ -152,6 +176,12 @@ class AddProjectFragment: Fragment() {
             }
         }
 
+        /**
+         * Validates the project dates entered
+         *
+         * @property projectStartDatum The start date in editable form
+         * @property projectEindDatum The start date in editable form
+         */
         fun projectDatesValidator(projectStartDatum: Editable, projectEindDatum: Editable): Boolean {
             var status = false
             var dateConverterStart = MaterialDateConverter()
@@ -176,6 +206,11 @@ class AddProjectFragment: Fragment() {
             return status
         }
 
+        /**
+         * Validates the budget entered
+         *
+         * @property budget Editable text
+         */
         fun projectBudgetValidator(budget: Editable): Boolean {
             var status = false
             val regex = """[0-9.]+""".toRegex()

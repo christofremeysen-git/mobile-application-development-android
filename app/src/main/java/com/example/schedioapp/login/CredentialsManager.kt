@@ -8,14 +8,22 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.auth0.android.result.Credentials
 
-// https://auth0.com/docs/libraries/auth0-android
-
+/**
+ * This class arranges access to the app.
+ * @property ACCESS_TOKEN The token needed to access the app
+ * @property editor Stores preferences
+ */
 object CredentialsManager {
 
     private const val ACCESS_TOKEN = "access_token"
 
     private lateinit var editor: SharedPreferences.Editor
 
+    /**
+     * Saves the submitted credentials of the user
+     * @property context Abstract class providing info about application
+     * @property credentials The credentials of the user
+     */
     fun saveCredentials(context: Context, credentials: Credentials) {
 
         val masterKeyAlias = KeyGenParameterSpec.Builder(
@@ -43,6 +51,11 @@ object CredentialsManager {
             .apply()
     }
 
+    /**
+     * Generates an access token
+     * @property context Abstract class providing info about application
+     * @return Returns the token in the form of a string
+     */
     fun getAccessToken(context: Context): String? {
 
         val masterKeyAlias = KeyGenParameterSpec.Builder(

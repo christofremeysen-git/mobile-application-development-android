@@ -6,6 +6,10 @@ import androidx.room.PrimaryKey
 import com.example.schedioapp.domain.Project
 import com.squareup.moshi.Json
 
+/**
+ * Database entity DatabaseProject
+ * This represents a Project in the database
+ */
 @Entity(tableName = "project_table")
 data class DatabaseProject(
         @PrimaryKey()

@@ -4,12 +4,18 @@ import com.example.schedioapp.database.project.DatabaseProject
 import kotlinx.serialization.Required
 import kotlinx.serialization.Serializable
 
+/**
+ * API model class, containing an arraylist of projects, serialized in a custom way
+ */
 @Serializable
 data class ApiProjectContainer(
     @Serializable(with = ProjectsSerializer::class)
     val apiProjects: ArrayList<ApiProject>
 )
 
+/**
+ * API model class, which is serialized in a custom way
+ */
 @Serializable(with = ProjectSerializer::class)
 data class ApiProject(
     @Required
@@ -56,6 +62,10 @@ fun ApiProjectContainer.asDomainModel(): List<Project> {
 }
 */
 
+/**
+ * Method converting an array of API projects to an array of database projects
+ * Returns an array of database projects
+ */
 fun ApiProjectContainer.asDatabaseProjectModel(): Array<DatabaseProject> {
     return apiProjects.map {
         DatabaseProject(
@@ -70,6 +80,10 @@ fun ApiProjectContainer.asDatabaseProjectModel(): Array<DatabaseProject> {
     }.toTypedArray()
 }
 
+/**
+ * Method converting an API project to a database project
+ * @return Returns a database project
+ */
 fun ApiProject.asDatabaseProject(): DatabaseProject {
     return DatabaseProject(
         id = id,

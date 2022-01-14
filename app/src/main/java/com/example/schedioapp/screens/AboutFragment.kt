@@ -8,6 +8,10 @@ import androidx.fragment.app.Fragment
 import com.example.schedioapp.R
 import timber.log.Timber
 
+/**
+ * A [Fragment] instance
+ * Used to display more information about the app
+ */
 class AboutFragment: Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

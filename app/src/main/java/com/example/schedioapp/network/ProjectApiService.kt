@@ -21,7 +21,6 @@ import timber.log.Timber
 
 private const val BASE_URL = "https://localhost:44342/api/"
 
-// https://square.github.io/okhttp/3.x/logging-interceptor/okhttp3/logging/HttpLoggingInterceptor.Level.html
 private val logger = HttpLoggingInterceptor()
     .apply { level = HttpLoggingInterceptor.Level.BODY }
 
@@ -39,6 +38,9 @@ private val retrofit = Retrofit.Builder()
     .client(client)
     .build()
 
+/**
+ * The API service, containing GET, POST and DELETE calls
+ */
 interface ProjectApiService {
     // https://auth0.com/docs/security/tokens/access-tokens
     // @Headers("Authorization: Bearer ")
@@ -57,6 +59,10 @@ interface ProjectApiService {
 
 }
 
+/**
+ * Object wherein the API project service is created, taking lazy loading into account
+ * @constructor retrofitService Instantiates the project API service in a lazy way
+ */
 object ProjectApi {
     val retrofitService: ProjectApiService by lazy {
         retrofit.create(ProjectApiService::class.java)
@@ -71,6 +77,10 @@ object ProjectApi {
     }
 }
 
+/**
+ * A [KSerializer] subclass.
+ * Provides methods to serialize and deserialize API projects
+ */
 class ProjectSerializer: KSerializer<ApiProject> {
     override fun deserialize(decoder: Decoder): ApiProject = decoder.decodeStructure(descriptor) {
         var id = 0
@@ -120,8 +130,15 @@ class ProjectSerializer: KSerializer<ApiProject> {
     }
 }
 
+/**
+ * Object used to serialize a JSON array of API projects
+ */
 object  ProjectsSerializer: JsonTransformingSerializer<List<ApiProject>>(ListSerializer(ProjectSerializer()))
 
+/**
+ * An [Interceptor] subclass
+ * Used to deal with JSON arrays serialization
+ */
 class httpInterceptor: Interceptor {
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {

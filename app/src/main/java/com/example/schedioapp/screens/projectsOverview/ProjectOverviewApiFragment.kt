@@ -11,6 +11,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.schedioapp.R
 import com.example.schedioapp.databinding.FragmentHomeBinding
 
+/**
+ * A [Fragment] subclass
+ * Not in use at the moment
+ * It could be used to display projects by means of the API (for testing purposes)
+ */
 class ProjectOverviewApiFragment: Fragment() {
     private val projectApiViewModel: ProjectApiViewModel by lazy {
         val activity = requireNotNull(this.activity)

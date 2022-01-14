@@ -1,5 +1,11 @@
 package com.example.schedioapp.screens.home
 
-class HomeFragment {
+import androidx.fragment.app.Fragment
+
+/**
+ * A [Fragment] subclass
+ * Not in use at the moment
+ */
+class HomeFragment: Fragment() {
 
 }

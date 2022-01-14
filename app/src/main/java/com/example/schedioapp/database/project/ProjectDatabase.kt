@@ -4,6 +4,9 @@ import android.content.Context
 import androidx.room.*
 import java.util.*
 
+/**
+ * Converts dates to strings and vice versa
+ */
 class DateConverter() {
 
     @TypeConverter
@@ -46,6 +49,9 @@ class DateConverter() {
 
 }
 
+/**
+ * Room database instance for the DatabaseProjects
+ */
 @Database(entities = [DatabaseProject::class], version = 1, exportSchema = false)
 @TypeConverters(DateConverter::class)
 abstract class ProjectDatabase: RoomDatabase() {

@@ -16,6 +16,11 @@ import retrofit2.await
 import timber.log.Timber
 import java.lang.Exception
 
+/**
+ * The project repository
+ *
+ * @property database A project database instance
+ */
 class ProjectRepository(private val database: ProjectDatabase) {
 
     val projects = MediatorLiveData<List<Project>>()
@@ -50,10 +55,18 @@ class ProjectRepository(private val database: ProjectDatabase) {
         }
     }
 
+    /**
+     * Filters added projects
+     *
+     * @property filter A filter term
+     */
     fun addProjectsFilter(filter: String?) {
         this.filter.value = filter
     }
 
+    /**
+     * Method used to refresh all projects
+     */
     suspend fun refreshProjects() {
         withContext(Dispatchers.IO) {
             val projects = ProjectApi.retrofitService.getAllProjectsAsync().await()
@@ -62,6 +75,12 @@ class ProjectRepository(private val database: ProjectDatabase) {
         }
     }
 
+    /**
+     * Method used to add a project
+     *
+     * @property newProject A project instance
+     * @return A project instance
+     */
     suspend fun addProject(newProject: Project): Project {
         val dateConverter = DateConverter()
         val newApiProject = ApiProject(
@@ -80,6 +99,11 @@ class ProjectRepository(private val database: ProjectDatabase) {
         return newProject
     }
 
+    /**
+     * Deletes a project
+     *
+     * @property project A project instance
+     */
     suspend fun deleteProject(project: Project) {
         val dateConverter = DateConverter()
         val deletedApiProject = ApiProject(

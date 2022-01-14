@@ -13,6 +13,13 @@ import com.example.schedioapp.domain.Project
 import com.example.schedioapp.screens.projectsOverview.ProjectListAdapter.ProjectListViewHolder
 import retrofit2.http.Tag
 
+/**
+ * A [ListAdapter] implementation
+ *
+ * @property clickListener Used to listen for clicks on a project
+ * @property clickDeleteListener Used to listen for clicks on a delete project icon
+ * @property projectChangeListener Used to listen for clicks on the project edit icon
+ */
 class ProjectListAdapter(val clickListener: ProjectsListener, val clickDeleteListener: ProjectsDeleteListener, val projectChangeListener: ProjectChangeListener): ListAdapter<Project, ProjectListViewHolder>(DiffCallback) {
 
     companion object DiffCallback : DiffUtil.ItemCallback<Project>() {

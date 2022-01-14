@@ -9,6 +9,9 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.lang.IllegalArgumentException
 
+/**
+ * Class used to indicate the API status
+ */
 enum class ProjectApiStatus { LOADING, ERROR, DONE }
 
 class ProjectApiViewModel(application: Application): AndroidViewModel(application) {

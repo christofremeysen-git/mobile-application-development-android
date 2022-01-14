@@ -14,6 +14,10 @@ import com.example.schedioapp.R
 import com.example.schedioapp.databinding.FragmentProjectBinding
 import com.example.schedioapp.screens.addProject.AddProjectViewModel
 
+/**
+ * A [Fragment] subclass
+ * Responsible for displaying a single project by means of Recycler View
+ */
 class ProjectFragment: Fragment() {
 
     private val args: ProjectFragmentArgs by navArgs()

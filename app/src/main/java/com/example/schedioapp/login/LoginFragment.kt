@@ -18,6 +18,14 @@ import com.auth0.android.result.UserProfile
 import com.example.schedioapp.R
 import timber.log.Timber
 
+/**
+ * A simple [Fragment] subclass
+ * Displays the login functionality
+ * @property account The Auth0 account information
+ * @property loggedInText The text mentioning that you are logged in
+ * @property welcomeText The text set to welcome a user
+ * @property loggedIn The text stating whether you are logged in or not
+ */
 class LoginFragment: Fragment() {
 
     private lateinit var account : Auth0
@@ -56,17 +64,31 @@ class LoginFragment: Fragment() {
         return view
     }
 
+    /**
+     * Creates the options menu (overflow menu)
+     * @property menu The menu element
+     * @property inflater The class used to render the menu
+     */
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.overflow_menu, menu)
     }
 
+    /**
+     * Checks whether an item was selected
+     *
+     * @property item The selected menu item
+     * @return States whether an item was selected
+     */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return NavigationUI.onNavDestinationSelected(
             item, requireView().findNavController())
                 || super.onOptionsItemSelected(item)
     }
 
+    /**
+     * Checks if an access token is present
+     */
     private fun checkIfToken(){
         val token = CredentialsManager.getAccessToken(requireContext())
         if(token != null){
@@ -77,6 +99,9 @@ class LoginFragment: Fragment() {
         }
     }
 
+    /**
+     * Sets the text when you are logged in
+     */
     private fun setLoggedInText() {
         if(loggedIn) {
             welcomeText.text = getText(R.string.welcome_text)
@@ -87,6 +112,9 @@ class LoginFragment: Fragment() {
         }
     }
 
+    /**
+     * Method used for login, stating success or failure
+     */
     private fun loginWithBrowser() {
 
         WebAuthProvider.login(account)
@@ -107,6 +135,9 @@ class LoginFragment: Fragment() {
             })
     }
 
+    /**
+     * Method used to logout of the app
+     */
     private fun logout() {
         WebAuthProvider.logout(account)
             .withScheme("demo")
@@ -123,6 +154,11 @@ class LoginFragment: Fragment() {
             })
     }
 
+    /**
+     * Method used to display the user profile
+     *
+     * @property accessToken The access token of the user
+     */
     private fun showUserProfile(accessToken: String){
         val client = AuthenticationAPIClient(account)
 

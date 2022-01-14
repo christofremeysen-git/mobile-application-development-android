@@ -4,6 +4,9 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
+/**
+ * Project model class, which is parcelable for transmission across fragments
+ */
 @Parcelize
 data class Project (
     var id: Int,
