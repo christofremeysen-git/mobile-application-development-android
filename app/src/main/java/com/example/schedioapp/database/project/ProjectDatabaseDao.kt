@@ -38,7 +38,7 @@ interface ProjectDatabaseDao {
      *
      * @return A list of database projects
      */
-    @Query("SELECT * FROM project_table ORDER BY id")
+    @Query("SELECT * FROM project_table ORDER BY project_naam")
     fun getAllProjects(): List<DatabaseProject>
 
     /**
@@ -64,7 +64,7 @@ interface ProjectDatabaseDao {
      * @property key The project status
      * @return A list of Live Data database projects
      */
-    @Query("SELECT * FROM project_table WHERE project_status = :key ORDER BY id")
+    @Query("SELECT * FROM project_table WHERE project_status = :key ORDER BY project_naam")
     fun getAllFilteredProjects(key: String): LiveData<List<DatabaseProject>>
 
     /**
