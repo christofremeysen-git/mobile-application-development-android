@@ -1,6 +1,7 @@
 package com.example.schedioapp.network
 
 import com.example.schedioapp.database.project.DatabaseProject
+import kotlinx.serialization.Required
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -11,12 +12,19 @@ data class ApiProjectContainer(
 
 @Serializable(with = ProjectSerializer::class)
 data class ApiProject(
+    @Required
     val id: Int,
+    @Required
     val naam: String,
+    @Required
     val startDatum: String,
+    @Required
     val eindDatum: String,
+    @Required
     val budget: Double,
+    @Required
     val status: String,
+    @Required
     val type: String
 )
 

@@ -51,7 +51,6 @@ interface ProjectApiService {
     // https://www.youtube.com/watch?v=m3yj7JaTTPI
     // https://material.io/components/radio-buttons/android#using-date-pickers
     // https://www.youtube.com/watch?v=qcDlcITNqnE
-    // https://medium.com/swlh/simplest-post-request-on-android-kotlin-using-retrofit-e0a9db81f11a
 
     @DELETE("projects/{id}")
     fun deleteProject(@Path("id") id: Int): Deferred<ApiProject>

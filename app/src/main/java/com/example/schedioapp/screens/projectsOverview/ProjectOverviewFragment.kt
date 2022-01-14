@@ -1,14 +1,13 @@
 package com.example.schedioapp.screens.projectsOverview
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.example.schedioapp.R
 import com.example.schedioapp.database.project.ProjectDatabase
 import com.example.schedioapp.databinding.FragmentProjectOverviewBinding
@@ -26,6 +25,8 @@ class ProjectOverviewFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        setHasOptionsMenu(true)
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_project_overview, container, false)
 
@@ -74,6 +75,17 @@ class ProjectOverviewFragment: Fragment() {
         for(chip in children) {
             chipGroup.addView(chip)
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.overflow_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item!!,
+            requireView().findNavController())
+                || super.onOptionsItemSelected(item)
     }
 
 }
