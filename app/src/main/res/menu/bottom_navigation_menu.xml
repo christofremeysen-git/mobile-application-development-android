@@ -2,10 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@color/green_dark">
     <item
-        android:id="@+id/homeFragment"
-        android:title="@string/menu_home"
-        android:icon="@drawable/ic_baseline_home_24" />
-    <item
         android:id="@id/projectOverviewFragment"
         android:title="@string/menu_project_overview"
         android:icon="@drawable/ic_outline_assignment_24" />

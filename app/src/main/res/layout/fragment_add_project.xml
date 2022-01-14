@@ -14,106 +14,143 @@
         android:layout_height="match_parent"
         tools:context="com.example.schedioapp.screens.addProject.AddProjectFragment">
 
-
-        <EditText
-            android:id="@+id/project_naam"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/project_form"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autofillHints="@string/project_name"
-            android:ems="10"
-            android:hint="@string/project_name"
-            android:inputType="textPersonName"
-            android:text="@string/project_name"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:padding="16dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" >
 
-        <EditText
-            android:id="@+id/project_startdatum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:autofillHints="Jan 1, 2022"
-            android:ems="10"
-            android:hint="@string/project_start_date"
-            android:inputType="date"
-            android:minHeight="48dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/project_naam" />
+            <EditText
+                android:id="@+id/project_naam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:autofillHints="@string/project_name"
+                android:ems="10"
+                android:hint="@string/project_name"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:text="@string/project_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/project_startdatum_calendar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/project_start_date"
-            app:layout_constraintStart_toEndOf="@id/project_startdatum"
-            app:layout_constraintTop_toTopOf="@id/project_startdatum"
-            app:srcCompat="@drawable/ic_baseline_calendar_month_24" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent">
 
-        <EditText
-            android:id="@+id/project_einddatum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:autofillHints="Jan 1, 2022"
-            android:ems="10"
-            android:hint="@string/project_end_date"
-            android:inputType="date"
-            android:minHeight="48dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/project_startdatum" />
+                <EditText
+                    android:id="@+id/project_startdatum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:autofillHints="Jan 1, 2022"
+                    android:ems="10"
+                    android:hint="@string/project_start_date"
+                    android:inputType="date"
+                    android:minHeight="48dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent" />
 
-        <ImageView
-            android:id="@+id/project_einddatum_calendar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/project_einddatum"
-            app:layout_constraintTop_toTopOf="@id/project_einddatum"
-            app:srcCompat="@drawable/ic_baseline_calendar_month_24"
-            android:contentDescription="@string/project_end_date" />
+                <ImageView
+                    android:id="@+id/project_startdatum_calendar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/project_start_date"
+                    app:layout_constraintStart_toEndOf="@id/project_startdatum"
+                    app:layout_constraintTop_toTopOf="@id/project_startdatum"
+                    app:srcCompat="@drawable/ic_baseline_calendar_month_24" />
 
-        <EditText
-            android:id="@+id/project_budget"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/project_budget"
-            android:inputType="numberDecimal"
-            android:minHeight="48dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/project_einddatum"
-            android:autofillHints="@string/project_budget" />
+            </LinearLayout>
 
-        <EditText
-            android:id="@+id/project_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/project_status"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/project_type"
-            android:autofillHints="@string/project_status" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent">
 
-        <EditText
-            android:id="@+id/project_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/project_type"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:text=""
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/project_budget"
-            android:autofillHints="@string/project_type" />
+                <EditText
+                    android:id="@+id/project_einddatum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:autofillHints="Jan 1, 2022"
+                    android:ems="10"
+                    android:hint="@string/project_end_date"
+                    android:inputType="date"
+                    android:minHeight="48dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/project_startdatum" />
 
-        <Button
-            android:id="@+id/submit_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/submit"
-            android:onClickListener="@{() -> AddProjectViewModel.submitProjectCLick()}"
-            app:layout_constraintTop_toBottomOf="@id/project_status"
-            app:layout_constraintStart_toStartOf="parent" />
+                <ImageView
+                    android:id="@+id/project_einddatum_calendar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/project_einddatum"
+                    app:layout_constraintTop_toTopOf="@id/project_einddatum"
+                    app:srcCompat="@drawable/ic_baseline_calendar_month_24"
+                    android:contentDescription="@string/project_end_date" />
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/project_budget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/project_budget"
+                android:inputType="numberDecimal"
+                android:minHeight="48dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/project_einddatum"
+                android:autofillHints="@string/project_budget" />
+
+            <EditText
+                android:id="@+id/project_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/project_status"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/project_type"
+                android:autofillHints="@string/project_status" />
+
+            <EditText
+                android:id="@+id/project_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/project_type"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:text=""
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/project_budget"
+                android:autofillHints="@string/project_type" />
+
+            <Button
+                android:id="@+id/submit_button"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:text="@string/submit"
+                android:gravity="center_horizontal"
+                android:onClickListener="@{() -> AddProjectViewModel.submitProjectCLick()}"
+                app:layout_constraintTop_toBottomOf="@id/project_form"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

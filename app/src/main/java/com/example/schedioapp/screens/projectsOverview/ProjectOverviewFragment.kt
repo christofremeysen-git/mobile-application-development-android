@@ -37,7 +37,10 @@ class ProjectOverviewFragment: Fragment() {
             project -> view!!.findNavController().navigate(ProjectOverviewFragmentDirections.actionProjectOverviewFragmentToProjectFragment(project))
         }, ProjectsDeleteListener {
             project -> viewModel.deleteProject(project)
-        })
+        }, ProjectChangeListener {
+                project -> view!!.findNavController().navigate(ProjectOverviewFragmentDirections.actionProjectOverviewFragmentToProjectFragment(project))
+        }
+        )
         binding.projectList.adapter = adapter
 
         val viewModelFactory = ProjectOverviewViewModelFactory(dataSource, application, adapter)

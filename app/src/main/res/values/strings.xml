@@ -40,6 +40,7 @@ Ipsum dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Co
     <string name="project_status">Status</string>
     <string name="project_type">Type</string>
     <string name="submit">Toevoegen</string>
+    <string name="edit_project">Pas project aan</string>
     <string name="delete_project">Verwijder project</string>
     <string name="empty_field">Verplicht veld</string>
     <string name="too_short_project_name">Minstens 5 karakters</string>
