@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>project-api</name>
+    </assembly>
+    <members>
+        <member name="M:project_api.Controllers.ProjectsController.GetProjects">
+            <summary>
+            Get all projects, ordered subsequently by naam, status and budget
+            </summary>
+            <returns>An array of projects.</returns>
+        </member>
+        <member name="M:project_api.Controllers.ProjectsController.GetProject(System.Int32)">
+            <summary>
+            Get the project with a given id.
+            </summary>
+            <param name="id">The id of the project.</param>
+            <returns>The applicable project.</returns>
+        </member>
+        <member name="M:project_api.Controllers.ProjectsController.Create(project_api.DTOs.ProjectDTO)">
+            <summary>
+            Add a new project.
+            </summary>
+            <param name="project">The new project.</param>
+            <returns></returns>
+        </member>
+        <member name="M:project_api.Controllers.ProjectsController.Update(System.Int32,project_api.Models.Project)">
+            <summary>
+            Modify a project.
+            </summary>
+            <param name="id">The id of the project to be modified.</param>
+            <param name="project">The modified project.</param>
+            <returns></returns>
+        </member>
+        <member name="M:project_api.Controllers.ProjectsController.DeleteProject(System.Int32)">
+            <summary>
+            Delete a project.
+            </summary>
+            <param name="id">The id of the project marked for deletion.</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
