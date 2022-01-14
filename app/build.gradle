@@ -125,6 +125,10 @@ dependencies {
     // Serialization support
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
     implementation "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
+
+    // Mockito
+    testImplementation 'org.mockito:mockito-core:4.0.0'
+    testImplementation 'org.ockito:mockito-inline:4.0.0:'
 }
 
 task ktlint(type: JavaExec, group: "verification") {
